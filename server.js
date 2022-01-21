@@ -49,7 +49,7 @@ app.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
     clientSecret: 's0qRV2M5hVriUhlTIzye4XwPElkSvnAGVXyhXw0J',
-    environment: sandbox,
+    environment: 'sandbox',
     redirectUri: 'https://wepull-back.herokuapp.com/',
   });
 

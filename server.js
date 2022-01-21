@@ -52,17 +52,18 @@ app.get('/', function (req, res) {
  */
 app.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
-    clientId: req.query.json.clientId,
-    clientSecret: req.query.json.clientSecret,
-    environment: req.query.json.environment,
-    redirectUri: req.query.json.redirectUri,
+    clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
+    clientSecret: 's0qRV2M5hVriUhlTIzye4XwPElkSvnAGVXyhXw0J',
+    environment: sandbox,
+    redirectUri: 'http://wepull-back.herokuapp.com/',
   });
 
-  const authUri = oauthClient.authorizeUri({
-    scope: [OAuthClient.scopes.Accounting],
-    state: 'intuit-test',
-  });
-  res.send(authUri);
+  var authUri = oauthClient.authorizeUri({
+    scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId],
+    state:'testState'
+  });  // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
+
+  res.redirect(authUri);
 });
 
 /**

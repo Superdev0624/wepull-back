@@ -26,7 +26,7 @@ app.set('view engine', 'html');
 app.use(bodyParser.json());
 app.use(cors());
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-app.use(function(req, res, next) {
+app.use(function(req, res) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();

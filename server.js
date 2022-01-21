@@ -41,12 +41,6 @@ let redirectUri = '';
 
 let oauthClient = null;
 
-/**
- * Home Route
- */
-app.get('/', function (req, res) {
-  res.render('index');
-});
 
 /**
  * Get the AuthorizeUri

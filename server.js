@@ -12,6 +12,7 @@ const app = express();
 const path = require('path');
 const OAuthClient = require('intuit-oauth');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const ngrok = process.env.NGROK_ENABLED === 'true' ? require('ngrok') : null;
 
 /**
@@ -23,7 +24,7 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 app.use(bodyParser.json());
-
+app.use(cors());
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 /**
@@ -62,7 +63,6 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId],
     state:'testState'
   });  // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
-
   res.redirect(authUri);
 });
 

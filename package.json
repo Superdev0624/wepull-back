@@ -1,0 +1,28 @@
+{
+  "name": "server-back",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node server.js",
+    "test": "./node_modules/mocha/bin/mocha test/**/*-test.js --reporter spec",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "latest",
+    "dotenv": "latest",
+    "ejs": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "intuit-oauth": "latest",
+    "ngrok": "latest",
+    "path": "latest"
+  },
+  "devDependencies": {
+    "snyk": "latest"
+  },
+  "snyk": true
+}

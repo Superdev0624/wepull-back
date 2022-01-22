@@ -12,7 +12,8 @@ const app = express();
 const path = require('path');
 const OAuthClient = require('intuit-oauth');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const { callbackify } = require('util');
 const ngrok = process.env.NGROK_ENABLED === 'true' ? require('ngrok') : null;
 
 /**
@@ -26,10 +27,6 @@ app.set('view engine', 'html');
 app.use(bodyParser.json());
 app.use(cors());
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-// });
 /**
  * App Variables
  * @type {null}
@@ -51,13 +48,13 @@ let oauthClient = null;
 app.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
-    clientSecret: 's0qRV2M5hVriUhlTIzye4XwPElkSvnAGVXyhXw0J',
+    clientSecret: '7I1groFfwJS1nho18cQSaCwuGkI5u4iSuv7wshjs',
     environment: 'sandbox',
     redirectUri: 'https://wepull-back.herokuapp.com',
   });
 
   var authUri = oauthClient.authorizeUri({
-    scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId],
+    scope:[OAuthClient.scopes.Accounting],
     state:'testState'
   });  // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
   res.send(authUri);

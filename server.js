@@ -48,7 +48,7 @@ let oauthClient = null;
 app.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
-    clientSecret: '7I1groFfwJS1nho18cQSaCwuGkI5u4iSuv7wshjs',
+    clientSecret: 'XnF8xXJsbUhVkbfb6MiW6GCM1aGzqHy38fdbV7x7',
     environment: 'sandbox',
     redirectUri: 'https://wepull-back.herokuapp.com',
   });

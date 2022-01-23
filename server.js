@@ -50,7 +50,7 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
     clientSecret: 'mYerpvoNJSTUWmfmEtkqa14qXH0pIN4dcxSrBaaF',
     environment: 'sandbox',
-    redirectUri: ' https://wepull-back.herokuapp.com/oauth-redirect',
+    redirectUri: ' https://2f97-188-43-136-33.ngrok.io',
   });
 
   var authUri = oauthClient.authorizeUri({
@@ -62,26 +62,17 @@ app.get('/authUri', urlencodedParser, function (req, res) {
 /**
  * Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
  */
-app.get('/oauth-redirect', function (req, res) {
-  oauthClient = new OAuthClient({
-    clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
-    clientSecret: 'mYerpvoNJSTUWmfmEtkqa14qXH0pIN4dcxSrBaaF',
-    environment: 'sandbox',
-    redirectUri: ' https://wepull-back.herokuapp.com/oauth-redirect',
-  });
-
-  console.log(req.url);
+app.get('/callback', function (req, res) {
   oauthClient
     .createToken(req.url)
     .then(function (authResponse) {
       oauth2_token_json = JSON.stringify(authResponse.getJson(), null, 2);
-      console.log(oauth2_token_json);
-      res.redirect(`https://2f97-188-43-136-33.ngrok.io/app?token=${oauth2_token_json}`);
     })
     .catch(function (e) {
       console.error(e);
-      res.send(0);
     });
+
+  res.send('');
 });
 
 /**

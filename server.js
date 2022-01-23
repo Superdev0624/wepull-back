@@ -62,16 +62,25 @@ app.get('/authUri', urlencodedParser, function (req, res) {
  * Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
  */
 app.get('/callback', function (req, res) {
+  oauthClient = new OAuthClient({
+    clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
+    clientSecret: 'wn3CwUGrjDgghFCiyAEfsL0AVqRRJBIdgIiSAqie',
+    environment: 'sandbox',
+    redirectUri: 'https://d1f3-188-43-136-33.ngrok.io/app',
+  });
+
   oauthClient
     .createToken(req.url)
     .then(function (authResponse) {
       oauth2_token_json = JSON.stringify(authResponse.getJson(), null, 2);
+    console.log(oauth2_token_json)
+    res.send(oauth2_token_json);
     })
     .catch(function (e) {
       console.error(e);
     });
 
-  res.send('');
+  res.send();
 });
 
 /**

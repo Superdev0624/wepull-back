@@ -70,6 +70,7 @@ app.get('/callback', function (req, res) {
     redirectUri: ' https://wepull-back.herokuapp.com/callback',
   });
 
+  console.log(req.url);
   oauthClient
     .createToken(req.url)
     .then(function (authResponse) {

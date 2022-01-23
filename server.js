@@ -1,6 +1,7 @@
 'use strict';
 
 require('dotenv').config();
+
 /**
  * Require the dependencies
  * @type {*|createApplication}
@@ -10,14 +11,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const OAuthClient = require('intuit-oauth');
-const useLocation = require('react-router-dom')
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const { callbackify } = require('util');
+const cors = require('cors')
 const ngrok = process.env.NGROK_ENABLED === 'true' ? require('ngrok') : null;
-const step = useLocation().step
-const authcode = new URLSearchParams(step).get('code')
-console.log(authcode)
 /**
  * Configure View and Handlebars
  */
@@ -27,8 +23,9 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors())
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 /**
  * App Variables
  * @type {null}
@@ -43,6 +40,12 @@ let redirectUri = '';
 
 let oauthClient = null;
 
+/**
+ * Home Route
+ */
+app.get('/', function (req, res) {
+  res.render('index');
+});
 
 /**
  * Get the AuthorizeUri
@@ -50,19 +53,18 @@ let oauthClient = null;
 app.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
-    clientSecret: 'mYerpvoNJSTUWmfmEtkqa14qXH0pIN4dcxSrBaaF',
-    environment: 'sandbox',
-    redirectUri: ' https://e191-188-43-136-33.ngrok.io/app',
+    clientSecret: 's0qRV2M5hVriUhlTIzye4XwPElkSvnAGVXyhXw0J',
+    environment: sandbox,
+    redirectUri: 'http://wepull-back.herokuapp.com/',
   });
 
   var authUri = oauthClient.authorizeUri({
-    scope:[OAuthClient.scopes.Accounting],
+    scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId],
     state:'testState'
   });  // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
-  res.send(authUri);
-  console.log(authUri);
-
+  res.redirect(authUri);
 });
+
 /**
  * Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
  */

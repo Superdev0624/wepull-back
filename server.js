@@ -55,7 +55,7 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId],
     state:'testState'
   });  // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
-  res.redirect(authUri);
+  res.send(authUri);
 });
 
 /**

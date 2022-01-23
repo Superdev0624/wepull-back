@@ -23,7 +23,7 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 /**
@@ -48,7 +48,7 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
     clientSecret: 'wn3CwUGrjDgghFCiyAEfsL0AVqRRJBIdgIiSAqie',
     environment: 'sandbox',
-    redirectUri: 'https://e191-188-43-136-33.ngrok.io/app',
+    redirectUri: 'https://d1f3-188-43-136-33.ngrok.io/app',
   });
 
   var authUri = oauthClient.authorizeUri({

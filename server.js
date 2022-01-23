@@ -48,7 +48,7 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
     clientSecret: 'wn3CwUGrjDgghFCiyAEfsL0AVqRRJBIdgIiSAqie',
     environment: 'sandbox',
-    redirectUri: 'https://d1f3-188-43-136-33.ngrok.io/app',
+    redirectUri: ' https://2247-188-43-136-33.ngrok.io/app',
   });
 
   var authUri = oauthClient.authorizeUri({

@@ -48,7 +48,7 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
     clientSecret: 'gwwrDFDBvMI5Ava58Ob8Fby5Yzy90Wi7eA3g2yPW',
     environment: 'sandbox',
-    redirectUri: 'https://5a39-188-43-136-33.ngrok.io/app',
+    redirectUri: 'https://wepull.herokuapp.com/app',
   });
 
   var authUri = oauthClient.authorizeUri({

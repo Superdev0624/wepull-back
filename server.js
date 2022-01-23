@@ -74,16 +74,6 @@ app.get('/callback', function (req, res) {
       res.send('error');
     });
 });
-app.get('/validationIdToken', function(req,res) {
-  oauthClient.validateIdToken()
-  .then(function(response){
-      console.log('Is my ID token validated  : ' + response);
-  })
-  .catch(function(e) {
-      console.log('The error is '+ JSON.stringify(e));
-  });
- res.send('true')
-})
 /**
  * Display the token : CAUTION : JUST for sample purposes
  */

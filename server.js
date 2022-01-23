@@ -56,6 +56,7 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     state:'testState'
   });  // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
   res.send(authUri);
+  console.log('test1', authUri);
 });
 
 /**
@@ -69,6 +70,7 @@ app.get('/callback', function (req, res) {
     redirectUri: 'https://d1f3-188-43-136-33.ngrok.io/app',
   });
  console.log('sdfsdfsdf', req.url)
+ console.log('test2', authUri);
   oauthClient
     .createToken(`https://wepull-back.herokuapp.com/` + req.url)
     .then(function (authResponse) {

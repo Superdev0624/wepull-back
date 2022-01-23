@@ -61,7 +61,7 @@ app.get('/authUri', urlencodedParser, function (req, res) {
 /**
  * Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`
  */
-app.post('/callback', function (req, res) {
+app.get('/callback', function (req, res) {
   oauthClient
     .createToken(req.url)
     .then(function (authResponse) {

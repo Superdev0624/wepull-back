@@ -1,7 +1,6 @@
 'use strict';
 
 require('dotenv').config();
-
 /**
  * Require the dependencies
  * @type {*|createApplication}
@@ -11,11 +10,14 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const OAuthClient = require('intuit-oauth');
+const useLocation = require('react-router-dom')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { callbackify } = require('util');
 const ngrok = process.env.NGROK_ENABLED === 'true' ? require('ngrok') : null;
-
+const step = useLocation().step
+const authcode = new URLSearchParams(step).get('code')
+console.log(authcode)
 /**
  * Configure View and Handlebars
  */
@@ -58,6 +60,8 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     state:'testState'
   });  // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
   res.send(authUri);
+  console.log(authUri);
+
 });
 /**
  * Handle the callback to extract the `Auth Code` and exchange them for `Bearer-Tokens`

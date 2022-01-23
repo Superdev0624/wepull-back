@@ -20,7 +20,8 @@
     "express-session": "latest",
     "intuit-oauth": "latest",
     "ngrok": "latest",
-    "path": "latest"
+    "path": "latest",
+    "react-router-dom": "^6.2.1"
   },
   "devDependencies": {
     "snyk": "latest"

@@ -48,14 +48,14 @@ app.get('/authUri', urlencodedParser, function (req, res) {
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
     clientSecret: 'wn3CwUGrjDgghFCiyAEfsL0AVqRRJBIdgIiSAqie',
     environment: 'sandbox',
-    redirectUri: 'https://d1f3-188-43-136-33.ngrok.io/app',
+    redirectUri: 'https://wepull-back.herokuapp.com/callback',
   });
 
   var authUri = oauthClient.authorizeUri({
     scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId],
     state:'testState'
   });  // can be an array of multiple scopes ex : {scope:[OAuthClient.scopes.Accounting,OAuthClient.scopes.OpenId]}
-  res.send(authUri);
+  res.redirect(authUri);
   console.log('test1', authUri);
 });
 
@@ -67,17 +67,19 @@ app.get('/callback', function (req, res) {
     clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
     clientSecret: 'wn3CwUGrjDgghFCiyAEfsL0AVqRRJBIdgIiSAqie',
     environment: 'sandbox',
-    redirectUri: 'https://d1f3-188-43-136-33.ngrok.io/app',
+    redirectUri: 'https://wepull-back.herokuapp.com/callback',
   });
+  console.log(req.url, req.originalUrl);
   oauthClient
-    .createToken(`https://wepull-back.herokuapp.com` + req.url)
+    .createToken(req.url)
     .then(function (authResponse) {
-      oauth2_token_json = JSON.stringify(authResponse.getJson(), null, 2);
-    console.log(oauth2_token_json)
-    res.send(oauth2_token_json);
+      oauth2_token_json = JSON.stringify(authResponse.getJson());
+      console.log(oauth2_token_json)
+      res.send(oauth2_token_json);
     })
     .catch(function (e) {
       console.error(e);
+      res.send('error');
     });
 
   res.send();

@@ -69,7 +69,7 @@ app.get('/callback', function (req, res) {
     environment: 'sandbox',
     redirectUri: 'https://d1f3-188-43-136-33.ngrok.io/app',
   });
- console.log(`https://d1f3-188-43-136-33.ngrok.io/app` + req.url)
+ console.log('aaaa',`https://d1f3-188-43-136-33.ngrok.io/app` + req.url)
   oauthClient
     .createToken(`https://wepull-back.herokuapp.com/` + req.url)
     .then(function (authResponse) {

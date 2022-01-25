@@ -127,7 +127,7 @@ app.get('/disconnect', function (req, res) {
     scope: [OAuthClient.scopes.OpenId, OAuthClient.scopes.Email],
     state: 'intuit-test',
   });
-  res.redirect(authUri);
+  res.send(authUri);
 });
 
 /**

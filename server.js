@@ -118,18 +118,15 @@ app.get('/getCompanyInfo', function (req, res) {
     });
 });
 
-app.get('/getvendorInfo', function (req,res) {
-  console.log('oac',oauthClient)
-  console.log('token',oauthClient.getToken())
+app.post('/getvendorInfo', function (req,res) {
   const companyID = oauthClient.getToken().realmId;
- const vendorID = oauthClient.getToken().vendorId
   const url =
     oauthClient.environment == 'sandbox'
       ? OAuthClient.environment.sandbox
       : OAuthClient.environment.production;
 
   oauthClient
-    .makeApiCall({ url: `${url}v3/company/${companyID}/vendor/${companyID}` })
+    .makeApiCall({ url: `${url}v3/company/${companyID}/vendor` })
     .then(function (authResponse) {
       console.log(`The response for API call is :${JSON.stringify(authResponse)}`);
       res.send(JSON.parse(authResponse.text()));

@@ -103,7 +103,7 @@ app.get('/getCompanyInfo', function (req, res) {
   const companyID = oauthClient.getToken().realmId;
 
   const url =
-    oauthClient.environment == 'sandbox'
+    oauthClient.environment == 'production'
       ? OAuthClient.environment.sandbox
       : OAuthClient.environment.production;
 
@@ -121,7 +121,7 @@ app.get('/getCompanyInfo', function (req, res) {
 app.post('/createvendor', function (req,res) {
   const companyID = oauthClient.getToken().realmId;
   const url =
-    oauthClient.environment == 'sandbox'
+    oauthClient.environment == 'production'
       ? OAuthClient.environment.sandbox
       : OAuthClient.environment.production;
 

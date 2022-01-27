@@ -118,7 +118,7 @@ app.get('/getCompanyInfo', function (req, res) {
     });
 });
 
-app.post('/getvendorInfo', function (req,res) {
+app.get('/getvendorInfo', function (req,res) {
   const companyID = oauthClient.getToken().realmId;
  const vendorID = oauthClient.getToken().vendorId
   const url =

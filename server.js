@@ -45,9 +45,9 @@ let oauthClient = null;
  */
 app.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
-    clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
-    clientSecret: 'gwwrDFDBvMI5Ava58Ob8Fby5Yzy90Wi7eA3g2yPW',
-    environment: 'sandbox',
+    clientId: 'ABTyuQ23uq6isyfwyYXHCin0W0NAa16179vAU9War5ckmPN4Bg',
+    clientSecret: 'iXx1tWsVjZTeK508vyLt9vKS4UjznLwRQGWVbEcI',
+    environment: 'production',
     redirectUri: 'https://e5da-188-43-136-33.ngrok.io/app',
   });
 

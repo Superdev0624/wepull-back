@@ -45,9 +45,9 @@ let oauthClient = null;
  */
 app.get('/authUri', urlencodedParser, function (req, res) {
   oauthClient = new OAuthClient({
-    clientId: 'ABTyuQ23uq6isyfwyYXHCin0W0NAa16179vAU9War5ckmPN4Bg',
-    clientSecret: 'iXx1tWsVjZTeK508vyLt9vKS4UjznLwRQGWVbEcI',
-    environment: 'production',
+    clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
+    clientSecret: 'gwwrDFDBvMI5Ava58Ob8Fby5Yzy90Wi7eA3g2yPW',
+    environment: 'sandbox',
     redirectUri: 'https://fbaf-188-43-136-33.ngrok.io/app',
   });
 
@@ -121,7 +121,7 @@ app.get('/getCompanyInfo', function (req, res) {
 app.post('/createvendor', function (req,res) {
   const companyID = oauthClient.getToken().realmId;
   const url =
-    oauthClient.environment == 'production'
+    oauthClient.environment == 'sandbox'
       ? OAuthClient.environment.sandbox
       : OAuthClient.environment.production;
 

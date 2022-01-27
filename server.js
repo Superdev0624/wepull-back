@@ -118,7 +118,7 @@ app.get('/getCompanyInfo', function (req, res) {
     });
 });
 
-app.post('/vendor', function (req,res) {
+app.post('/getvendorInfo', function (req,res) {
   const companyID = oauthClient.getToken().realmId;
  const vendorID = oauthClient.getToken().vendorId
   const url =
@@ -127,7 +127,7 @@ app.post('/vendor', function (req,res) {
       : OAuthClient.environment.production;
 
   oauthClient
-    .makeApiCall({ url: `${url}v3/company/${companyID}/vendor/${vendorID}` })
+    .makeApiCall({ url: `${url}v3/company/${companyID}/vendor/${companyID}` })
     .then(function (authResponse) {
       console.log(`The response for API call is :${JSON.stringify(authResponse)}`);
       res.send(JSON.parse(authResponse.text()));

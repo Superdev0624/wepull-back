@@ -118,7 +118,7 @@ app.get('/getCompanyInfo', function (req, res) {
     });
 });
 
-app.post('/getvendorInfo', function (req,res) {
+app.post('/createvendor', function (req,res) {
   const companyID = oauthClient.getToken().realmId;
   const url =
     oauthClient.environment == 'sandbox'

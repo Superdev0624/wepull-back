@@ -119,7 +119,8 @@ app.get('/getCompanyInfo', function (req, res) {
 });
 
 app.get('/getvendorInfo', function (req,res) {
-  console.log(oauthClient.getToken())
+  console.log('oac',oauthClient)
+  console.log('token',oauthClient.getToken())
   const companyID = oauthClient.getToken().realmId;
  const vendorID = oauthClient.getToken().vendorId
   const url =

@@ -103,7 +103,7 @@ app.get('/getCompanyInfo', function (req, res) {
   const companyID = oauthClient.getToken().realmId;
 
   const url =
-    oauthClient.environment == 'production'
+    oauthClient.environment == 'sandbox'
       ? OAuthClient.environment.sandbox
       : OAuthClient.environment.production;
 
@@ -117,6 +117,7 @@ app.get('/getCompanyInfo', function (req, res) {
       console.error(e);
     });
 });
+
 
 /**
  * disconnect ()

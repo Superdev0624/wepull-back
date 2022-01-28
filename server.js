@@ -118,30 +118,26 @@ app.get('/getCompanyInfo', function (req, res) {
     });
 });
 app.post('/createCustomer', urlencodedParser, function(req, res) {
-  oauthClient = new OAuthClient({
-    clientId: 'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
-    clientSecret: 'l3z9MnMh2ajU2x90jEBlNPyruWTUy8Wz7u86tWZQ',
-    environment: 'sandbox',
-    redirectUri: 'https://5dd2-188-43-136-33.ngrok.io/app',
-  });
-  var accesstoken = JSON.parse(token_json);
+  var response = JSON.parse(token_json);
+  const companyID = oauthClient.getToken().realmId;
 
   // save the access token somewhere on behalf of the logged in user
-  var qbo = new QuickBooks(config.clientId,
-      config.clientSecret,
-      token.access_token, /* oAuth access token */
+  var qbo = new QuickBooks(
+      'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
+      'l3z9MnMh2ajU2x90jEBlNPyruWTUy8Wz7u86tWZQ',
+      response.access_token, /* oAuth access token */
       false, /* no token secret for oAuth 2.0 */
-      realmId,
+      companyID,
       true, /* use a sandbox account */
       true, /* turn debugging on */
       4, /* minor version */
       '2.0', /* oauth version */
-      token.refresh_token /* refresh token */);
+      response.refresh_token /* refresh token */);
 
   qbo.createCustomer({DisplayName: req.body.displayName}, function(err, customer) {
       if (err) console.log(err)
       else console.log("The response is :" + JSON.stringify(customer,null,2));
-      res.send(customer   );
+      res.send(customer);
   });
 
 });

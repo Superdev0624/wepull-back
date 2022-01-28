@@ -117,29 +117,23 @@ app.get('/getCompanyInfo', function (req, res) {
       console.error(e);
     });
 });
-app.post('/createCustomer', urlencodedParser, function(req, res) {
-  var response = JSON.parse(token_json);
+app.get('/getExpenses', function (req, res) {
   const companyID = oauthClient.getToken().realmId;
 
-  // save the access token somewhere on behalf of the logged in user
-  var qbo = new QuickBooks(
-      'ABrOwTX3hXgkfMSGc90PAahKuDw890Vpq5XN2Bg3DBdzldY6wL',
-      'l3z9MnMh2ajU2x90jEBlNPyruWTUy8Wz7u86tWZQ',
-      response.access_token, /* oAuth access token */
-      false, /* no token secret for oAuth 2.0 */
-      companyID,
-      true, /* use a sandbox account */
-      true, /* turn debugging on */
-      4, /* minor version */
-      '2.0', /* oauth version */
-      response.refresh_token /* refresh token */);
+  const url =
+    oauthClient.environment == 'sandbox'
+      ? OAuthClient.environment.sandbox
+      : OAuthClient.environment.production;
 
-  qbo.createCustomer({DisplayName: req.body.displayName}, function(err, customer) {
-      if (err) console.log(err)
-      else console.log("The response is :" + JSON.stringify(customer,null,2));
-      res.send(customer);
-  });
-
+  oauthClient
+    .makeApiCall({ url: `${url}v3/company/${companyID}/vendor/1` })
+    .then(function (authResponse) {
+      console.log(`The response for API call is :${JSON.stringify(authResponse)}`);
+      res.send(JSON.parse(authResponse.text()));
+    })
+    .catch(function (e) {
+      console.error(e);
+    });
 });
 
 /**
